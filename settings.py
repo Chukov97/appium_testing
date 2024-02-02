@@ -10,11 +10,6 @@ class Config(BaseSettings):
 
     app: str = os.getenv('APP')
     remote_url: str = os.getenv('REMOTE_URL')
-    base_url: str = 'https://demowebshop.tricentis.com'
-    driver_name: str = 'chrome'
-    load_strategy: str = 'eager'
-    window_width: int = 1920
-    window_height: int = 1080
     timeout: float = 10.0
 
 
