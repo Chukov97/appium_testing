@@ -14,7 +14,7 @@ def mobile_management():
         "deviceName": "Google Pixel 3",
 
         # Set URL of the application under test
-        "app": "bs://sample.app",
+        "app": config.app,
 
         # Set other BrowserStack capabilities
         'bstack:options': {
@@ -29,7 +29,7 @@ def mobile_management():
     })
 
     # browser.config.driver = webdriver.Remote("http://hub.browserstack.com/wd/hub", options=options)
-    browser.config.driver_remote_url = 'http://hub.browserstack.com/wd/hub'
+    browser.config.driver_remote_url = config.remote_url
     browser.config.driver_options = options
 
     browser.config.timeout = float(os.getenv('timeout', '10.0'))
