@@ -1,7 +1,7 @@
 pytest
 allure-pytest
 Appium-Python-Client
-pydantic==2.6.0
-python-dotenv~=1.0.1
-selene~=2.0.0rc7
+pydantic
+python-dotenv
+selene
 requests
