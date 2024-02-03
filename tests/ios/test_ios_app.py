@@ -2,7 +2,7 @@ import allure
 from screens.ios.main_screen import main_screen
 
 
-def test_search():
+def test_ios_app():
     with allure.step('Click text button'):
         main_screen.click_text_button()
     with allure.step('Input text'):
