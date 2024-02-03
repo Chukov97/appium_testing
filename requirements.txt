@@ -5,3 +5,4 @@ pydantic~=2.5.3
 pydantic-settings
 python-dotenv~=1.0.1
 selene~=2.0.0rc7
+requests
