@@ -1,7 +1,7 @@
-pytest
-allure-pytest
-Appium-Python-Client
-pydantic
-python-dotenv
-selene
-requests
+pytest==8.0.0
+allure-pytest==2.13.2
+Appium-Python-Client==3.1.1
+pydantic==2.6.0
+python-dotenv==1.0.1
+selene==2.0.0rc7
+requests==2.31.0
