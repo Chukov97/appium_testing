@@ -2,9 +2,12 @@ import allure
 from selene import have
 from screens.android.main_screen import main_screen
 from screens.android.search_screen import search_screen
+from screens.android.start_screen import start_screen
 
 
 def test_search_appium():
+    with allure.step('Skip wellcome screen'):
+        start_screen.skip_onboarding()
     with allure.step('Type search'):
         main_screen.click_search_form()
         main_screen.input_search_form('Appium')
@@ -17,6 +20,8 @@ def test_search_appium():
 
 
 def test_search_selenium():
+    with allure.step('Skip wellcome screen'):
+        start_screen.skip_onboarding()
     with allure.step('Type search'):
         main_screen.click_search_form()
         main_screen.input_search_form('Selenium')
