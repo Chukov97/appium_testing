@@ -1,7 +1,7 @@
 import pytest
 import allure
 import allure_commons
-from settings import config
+# from settings import config
 from appium.options.android import UiAutomator2Options
 from appium.options.ios import XCUITestOptions
 from selene import browser, support
@@ -12,14 +12,25 @@ from dotenv import load_dotenv
 
 
 def pytest_addoption(parser):
-    parser.addoption("--environment", default='bstack')
+    parser.addoption("--environment", default='local')
+
+
+def pytest_configure(config):
+    environment = config.getoption("--environment")
+    load_dotenv(dotenv_path=f'.env.{environment}')
+
+
+@pytest.fixture
+def environment(request):
+    return request.config.getoption("--environment")
 
 
 @pytest.fixture(scope='function', autouse=True)
-def mobile_management(request):
-    environment = request.config.getoption('--environment')
-    load_dotenv(dotenv_path=f'.env.{environment}')
-
+def mobile_management(environment):
+    from settings import config
+    # environment = request.config.getoption('--environment')
+    # load_dotenv(dotenv_path=f'.env.{environment}')
+    #
     options = config.driver_options(environment=environment)
 
     with allure.step('Init app session'):

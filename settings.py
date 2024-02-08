@@ -2,11 +2,11 @@ import os
 from dotenv import load_dotenv
 from appium.options.android import UiAutomator2Options
 from utils.file import abs_path_from_project
-import pydantic
+from pydantic import BaseModel
 
 
-class Config(pydantic.BaseModel):
-    load_dotenv()
+class Config(BaseModel):
+    environment: str
     user_name: str = os.getenv('USER_NAME')
     access_key: str = os.getenv('ACCESS_KEY')
 
@@ -20,6 +20,7 @@ class Config(pydantic.BaseModel):
     build_name: str = os.getenv('BUILD_NAME')
     project_name: str = os.getenv('PROJECT_NAME')
     session_name: str = os.getenv('SESSION_NAME')
+    platform_name: str = os.getenv('PLATFORM_NAME')
     platform_version: str = os.getenv('PLATFORM_VERSION')
 
     def driver_options(self, environment):
@@ -27,27 +28,36 @@ class Config(pydantic.BaseModel):
 
         if environment == 'local':
             options.set_capability('remote_url', self.remote_url)
-            options.set_capability('app', abs_path_from_project(self.app))
             options.set_capability('udid', self.udid)
             options.set_capability('deviceName', self.device_name)
             options.set_capability('appWaitActivity', self.app_wait_activity)
+            options.set_capability('app', abs_path_from_project(self.app))
 
         if environment == 'bstack':
-            # options.set_capability('remote_url', self.remote_url)
+            options.set_capability('remote_url', self.remote_url)
             options.set_capability('app', self.app)
             options.set_capability('deviceName', self.device_name)
             options.set_capability('platformVersion', self.platform_version)
+            options.set_capability('appWaitActivity', self.app_wait_activity)
             options.set_capability(
                 'bstack:options', {
-                    'projectName': self.project_name,
-                    'buildName': self.build_name,
-                    'sessionName': self.session_name,
+                    'projectName': 'First Python project',
+                    'buildName': 'browserstack-build-1',
+                    'sessionName': 'BStack first_test',
                     'userName': self.user_name,
-                    'accessKey': self.access_key
-                }
+                    'accessKey': self.access_key,
+                },
+            # options.set_capability(
+            #     'bstack:options', {
+            #         'projectName': self.project_name,
+            #         'buildName': self.build_name,
+            #         'sessionName': self.session_name,
+            #         'userName': self.user_name,
+            #         'accessKey': self.access_key,
+            #     },
             )
 
         return options
 
 
-config = Config()
+config = Config(environment='local')

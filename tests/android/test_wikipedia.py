@@ -5,7 +5,7 @@ from screens.android.search_screen import search_screen
 from screens.android.start_screen import start_screen
 
 
-def test_search_appium():
+def test_search_appium(environment):
     with allure.step('Skip wellcome screen'):
         start_screen.skip_onboarding()
     with allure.step('Type search'):
@@ -19,7 +19,7 @@ def test_search_appium():
         results.first.click()
 
 
-def test_search_selenium():
+def test_search_selenium(environment):
     with allure.step('Skip wellcome screen'):
         start_screen.skip_onboarding()
     with allure.step('Type search'):
