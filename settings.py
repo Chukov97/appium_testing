@@ -32,8 +32,8 @@ class Config(pydantic.BaseModel):
             options.set_capability('deviceName', self.device_name)
             options.set_capability('appWaitActivity', self.app_wait_activity)
 
-        elif environment == 'bstack':
-            options.set_capability('remote_url', self.remote_url)
+        if environment == 'bstack':
+            # options.set_capability('remote_url', self.remote_url)
             options.set_capability('app', self.app)
             options.set_capability('deviceName', self.device_name)
             options.set_capability('platformVersion', self.platform_version)
@@ -41,10 +41,10 @@ class Config(pydantic.BaseModel):
                 'bstack:options', {
                     'projectName': self.project_name,
                     'buildName': self.build_name,
-                    'sessionName': self.sessionName,
+                    'sessionName': self.session_name,
                     'userName': self.user_name,
-                    'accessKey': self.access_key,
-                },
+                    'accessKey': self.access_key
+                }
             )
 
         return options
